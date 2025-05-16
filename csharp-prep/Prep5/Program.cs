@@ -11,7 +11,7 @@ class Program
         Console.WriteLine($"Your number is {number}");
 
         int squarednumber = SquareNumber(number);
-        Console.WriteLine($"{name}, your number is {number}. This is it squared:{squarednumber}");
+        Console.WriteLine($"{name}, your number is {number}. This is it squared: {squarednumber}");
     }
 
     static int PromptUserNumber()

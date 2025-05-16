@@ -1,55 +1,36 @@
 using System;
 
-class Program
+class Car
 {
-    static void Main(string[] args)
+    // These are the pieces of information (data) a Car has
+    public string Color;  // Like 'Red', 'Blue'
+    public int Speed;     // Like 0, 60, 100
+    public string Model;  // Like 'Sedan', 'SUV'
+
+    // This is a special function called a 'constructor'.
+    // It's like the assembly instructions for when you first build a Car.
+    // It sets up the initial values.
+    public Car(string carColor, string carModel)
     {
-        Console.Write("What is your first name? ");
-        string first = Console.ReadLine();
+        Color = carColor; // Set the Car's color
+        Model = carModel; // Set the Car's model
+        Speed = 0;        // All new cars start at 0 speed
+    }
 
-        Console.Write("What is your last name? ");
-        string last = Console.ReadLine();
+    // These are actions (methods/functions) a Car can do
+    public void StartEngine()
+    {
+        Console.WriteLine("Engine started!");
+    }
 
-        Console.WriteLine($"Your name is {last}, {first} {last}.");
+    public void Accelerate(int amount)
+    {
+        Speed += amount; // Increase the speed by 'amount'
+        Console.WriteLine($"Accelerating! Current speed: {Speed} mph");
+    }
 
-
-        Console.Write("What is your grade percentage? ");
-        string answer = Console.ReadLine();
-        int percent = int.Parse(answer);
-
-        string letter = "";
-
-        if (percent >= 90)
-        {
-            letter = "A";
-        }
-        else if (percent >= 80)
-        {
-            letter = "B";
-        }
-        else if (percent >= 70)
-        {
-            letter = "C";
-        }
-        else if (percent >= 60)
-        {
-            letter = "D";
-        }
-        else
-        {
-            letter = "F";
-        }
-
-        Console.WriteLine($"Your grade is: {letter}");
-        
-        if (percent >= 70)
-        {
-            Console.WriteLine("You passed!");
-        }
-        else
-        {
-            Console.WriteLine("Better luck next time!");
-        }
-        
+    public void Honk()
+    {
+        Console.WriteLine("Beep! Beep!");
     }
 }
