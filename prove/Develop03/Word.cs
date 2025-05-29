@@ -20,7 +20,7 @@ public class Word
         }
         else
         {
-            return "______"; // Placeholder for hidden words
+            return "__"; // Placeholder for hidden words
         }
     }
 }

@@ -1,4 +1,5 @@
-using System; // Required for String.Format if you were to use it, but not strictly for string interpolation
+using System; //heavy
+//lifting
 
 public class ScriptureReference
 {
@@ -29,7 +30,7 @@ public class ScriptureReference
         get { return _endVerse; }
     }
 
-    // Constructor for a verse range (e.g., "Proverbs 3:5-6")
+    // Constructor for a verse range 
     public ScriptureReference(string book, int chapter, int startVerse, int endVerse)
     {
         _book = book;
