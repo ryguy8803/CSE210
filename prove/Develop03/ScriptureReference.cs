@@ -1,7 +1,7 @@
 using System; //heavy
 //lifting
 
-public class ScriptureReference
+public class ScriptureReferencegit 
 {
     
     private string _book;
