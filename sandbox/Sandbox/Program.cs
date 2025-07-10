@@ -1,46 +1,99 @@
-using System;
+using System; // Required for Console.WriteLine
+using System.Collections.Generic; // Required for List<T>
 
-class Car
+// Base class: Vehicle
+// This class defines a common interface for all vehicles.
+public abstract class Vehicle
 {
-    // These are the pieces of information (data) a Car has
-    public string Color;  // Like 'Red', 'Blue'
-    public int Speed;     // Like 0, 60, 100
-    public string Model;  // Like 'Sedan', 'SUV'
+    // Protected fields can be accessed by derived classes
+    protected string Make;
+    protected string Model;
 
-    // This is a special function called a 'constructor'.
-    // It's like the assembly instructions for when you first build a Car.
-    // It sets up the initial values.
-    public Car(string carColor, string carModel)
+    // Constructor for the Vehicle class
+    public Vehicle(string make, string model)
     {
-        Color = carColor; // Set the Car's color
-        Model = carModel; // Set the Car's model
-        Speed = 0;        // All new cars start at 0 speed
+        Make = make;
+        Model = model;
     }
 
-    // These are actions (methods/functions) a Car can do
-    public void StartEngine()
+    // Virtual method: This is the key to polymorphism in C#.
+    // The 'virtual' keyword allows derived classes to override this method.
+    // 'abstract' makes it a pure virtual-like method, making Vehicle an abstract class.
+    // This means you cannot create an object directly from Vehicle;
+    // you must create objects from its derived classes.
+    public abstract string StartEngine();
+
+    // No explicit destructor needed in C# like in C++ due to automatic garbage collection.
+    // The default constructor is implicitly provided.
+}
+
+// Derived class: Car, inherits publicly from Vehicle
+public class Car : Vehicle
+{
+    private int _numDoors; // Private field for number of doors
+
+    // Constructor for Car, calls the base class (Vehicle) constructor using 'base'
+    public Car(string make, string model, int numDoors)
+        : base(make, model) // Calls the Vehicle base constructor
     {
-        Console.WriteLine("Engine started!");
+        _numDoors = numDoors;
     }
 
-    public void Accelerate(int amount)
+    // Override the virtual StartEngine method from the base class.
+    // The 'override' keyword is mandatory in C# to indicate overriding a base method.
+    public override string StartEngine()
     {
-        Speed += amount; // Increase the speed by 'amount'
-        Console.WriteLine($"Accelerating! Current speed: {Speed} mph");
+        return $"The {Make} {Model} (Car) is roaring to life!";
+    }
+}
+
+// Derived class: Motorcycle, inherits publicly from Vehicle
+public class Motorcycle : Vehicle
+{
+    private bool _hasSidecar; // Private field for sidecar status
+
+    // Constructor for Motorcycle, calls the base class (Vehicle) constructor
+    public Motorcycle(string make, string model, bool hasSidecar)
+        : base(make, model) // Calls the Vehicle base constructor
+    {
+        _hasSidecar = hasSidecar;
     }
 
-    public void Honk()
+    // Override the virtual StartEngine method from the base class.
+    public override string StartEngine()
     {
-        Console.WriteLine("Beep! Beep!");
+        return $"The {Make} {Model} (Motorcycle) is kicking over.";
     }
-} nosnenaand
-ads
-dataaf
-af
-falseas
-falsesf
-saf
-saff
-asf
-safga
-get
+}
+
+// Main class to run the program
+public class Program
+{
+    // Main method where the program execution begins
+    public static void Main(string[] args)
+    {
+        // Demonstrating Polymorphism using a List of Vehicle.
+        // List<T> is similar to std::vector in C++, a dynamic array.
+        // In C#, memory management for objects is handled automatically by the Garbage Collector,
+        // so no need for unique_ptr.
+        List<Vehicle> vehicles = new List<Vehicle>();
+
+        // Add different types of vehicles to the list.
+        // Notice we're storing them as Vehicle type, even though
+        // we're creating Car and Motorcycle objects. This is the essence
+        // of polymorphism: treating derived objects as their base type.
+        vehicles.Add(new Car("Toyota", "Camry", 4));
+        vehicles.Add(new Motorcycle("Harley-Davidson", "Iron 883", false));
+        vehicles.Add(new Car("Honda", "Civic", 2));
+
+        // Iterate through the list and call StartEngine() on each vehicle.
+        // Because StartEngine() is an overridden method, the correct version
+        // (Car's or Motorcycle's) will be called automatically at runtime.
+        foreach (var vehicle in vehicles)
+        {
+            Console.WriteLine(vehicle.StartEngine());
+        }
+
+        // C# handles memory cleanup automatically, so no explicit deletion is needed.
+    }
+}
